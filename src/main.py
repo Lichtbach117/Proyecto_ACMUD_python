@@ -1,3 +1,7 @@
+import persistencia
+import inventario
+
+
 def main(): 
     while True:
         print("Bienvenido al sistema de administración de la tiendita de Don Aurelio\n")
@@ -17,9 +21,9 @@ def main():
             print("Por favor, ingrese un numero entero")
 
         if seleccion == 1:
-            pass
+            inventario.registrar_producto()
         elif seleccion == 2:
-            pass
+            inventario.consultar_producto()
         elif seleccion == 3:
             pass
         elif seleccion == 4:
