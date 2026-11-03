@@ -11,7 +11,14 @@ def agregar_producto(inv, codigo, nombre, categoria, precio, stock, stock_minimo
                    "precio": precio, "stock": stock, "stock_minimo": stock_minimo,
                    "proveedor": proveedor}
     
-
+def mostrar_productos(productos):
+    if not productos:
+        print("No hay productos para mostrar.")
+        return
+    filas = [[p["codigo"], p["nombre"], p["categoria"], f"${p['precio']:,.0f}",
+              p["stock"], p["stock_minimo"], p["proveedor"]] for p in productos]
+    print(tabulate(filas, headers=["Código", "Nombre", "Categoría", "Precio",
+                                   "Stock", "Mínimo", "Proveedor"], tablefmt="grid"))
 
 def consultar_producto():
     persistencia.leer_inventario(ruta)
