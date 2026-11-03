@@ -20,8 +20,8 @@ def mostrar_productos(productos):
     print(tabulate(filas, headers=["Código", "Nombre", "Categoría", "Precio",
                                    "Stock", "Mínimo", "Proveedor"], tablefmt="grid"))
 
-def consultar_producto():
-    persistencia.leer_inventario(ruta)
+def buscar_por_codigo(inventario, codigo):
+    return inventario.get(codigo)
 
 def modificar_producto():
     pass

@@ -9,9 +9,9 @@ rita_de_ventas_txt = os.path.join("data", "ventas")
 
 CATEGORIAS = ["Lacteos", "Bebidas", "Aseo", "Abarrotes", "Snacks"]
 
-def registrar(inv):
+def registrar(inventario):
     codigo = pedir_texto("Código: ").upper()
-    if codigo in inv:
+    if codigo in inventario:
         raise ReglaNegocioError(f"El código {codigo} ya existe.")
     nombre = pedir_texto("Nombre: ")
     categoria = pedir_opcion("Categoría:", CATEGORIAS)
@@ -19,8 +19,15 @@ def registrar(inv):
     stock = pedir_numero("Stock inicial: ", int)
     minimo = pedir_numero("Stock mínimo: ", int)
     proveedor = pedir_texto("Proveedor: ")
-    agregar_producto(inv, codigo, nombre, categoria, precio, stock, minimo, proveedor)
+    agregar_producto(inventario, codigo, nombre, categoria, precio, stock, minimo, proveedor)
     print("Producto registrado.")
+
+def consultar_codigo(inventario):
+    producto = buscar_por_codigo(inventario, pedir_texto("Código: ").upper())
+    if p:
+        mostrar_productos([producto])
+    else:
+        print("No existe un producto con ese código.")
 
 def main():
     inventario = cargar_inventario(ruta_de_inventario_txt)
