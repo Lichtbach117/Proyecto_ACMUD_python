@@ -1,7 +1,7 @@
 import persistencia
 import os
 from inventario import (agregar_producto)
-from persistencia import (cargar_inventario, crear_archivo)
+from persistencia import (cargar_inventario, crear_archivo, guardar_inventario)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto)
 
 ruta_de_inventario_txt = os.path.join("data", "inventario.txt")
@@ -62,9 +62,10 @@ def main():
             elif opcion == "9":
                 pass
             elif opcion == "10":
-                guardar_inventario(RUTA_INV, inventario)
+                guardar_inventario(ruta_de_inventario_txt, inventario)
                 print("Inventario guardado.")
             elif opcion == "0":
+                guardar_inventario(ruta_de_inventario_txt, inventario)
                 print("Hasta luego")
                 break
             else:

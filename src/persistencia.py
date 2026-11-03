@@ -51,6 +51,18 @@ def cargar_inventario(ruta):
         crear_archivo(ruta)
     return inventario
 
+def guardar_inventario(ruta, inventario):
+    """funcion para guardat inventario
+
+    Args:
+        ruta (txt): ruta del txt
+        inventario (lista): informacion de cata producto
+    """
+    os.makedirs(os.path.dirname(ruta), exist_ok=True)
+    with open(ruta, "w", encoding="utf-8") as f:
+        for info in inventario.values():
+            f.write(f"{info['codigo']}|{info['nombre']}|{info['categoria']}|{info['precio']}|"
+                    f"{info['stock']}|{info['stock_minimo']}|{info['proveedor']}\n")
 
 def leer_inventario(ruta):
     """
