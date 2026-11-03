@@ -1,20 +1,15 @@
-import persistencia
+from tabulate import tabulate
+from validaciones import ReglaNegocioError
 
-"""ruta consultar"""
-ruta = "inventario.txt"
 
-def registrar_producto():
-    print("#################################################")
-    print("INGRESE LOS DATOS DEL PRODUCTO")
-    print("#################################################\n")
-    datos1 = int(input("Ingrese el codigo del producto: "))
-    datos2 = str(input("Ingrese el nombre del producto: "))
-    datos3 = int(input("Ingrese el stock del producto: "))
-    datos4 = str(input("Ingrese la categoria del producto: "))
-    datos5 = int(input("Ingrese el precio del producto:"))
-    info = (datos1, datos2, datos3, datos4, datos5)
-
-    persistencia.editar_inventario(ruta, info)
+def agregar_producto(inv, codigo, nombre, categoria, precio, stock, stock_minimo, proveedor):
+    if codigo in inv:
+        raise ReglaNegocioError(f"El código {codigo} ya existe.")
+    if precio <= 0 or stock <= 0 or stock_minimo <= 0:
+        raise ReglaNegocioError("Precio, stock y stock mínimo deben ser mayores que cero.")
+    inv[codigo] = {"codigo": codigo, "nombre": nombre, "categoria": categoria,
+                   "precio": precio, "stock": stock, "stock_minimo": stock_minimo,
+                   "proveedor": proveedor}
     
 
 
