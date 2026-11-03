@@ -1,6 +1,6 @@
 import persistencia
 import os
-from inventario import (agregar_producto, modificar_producto, mostrar_productos)
+from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo)
 from persistencia import (cargar_inventario, crear_archivo, guardar_inventario)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto)
 
@@ -24,7 +24,7 @@ def registrar(inventario):
 
 def consultar_codigo(inventario):
     producto = buscar_por_codigo(inventario, pedir_texto("Código: ").upper())
-    if p:
+    if producto:
         mostrar_productos([producto])
     else:
         print("No existe un producto con ese código.")
