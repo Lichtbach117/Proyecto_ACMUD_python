@@ -1,11 +1,10 @@
-import persistencia
 import os
 from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo)
 from persistencia import (cargar_inventario, crear_archivo, guardar_inventario)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto)
 
 ruta_de_inventario_txt = os.path.join("data", "inventario.txt")
-rita_de_ventas_txt = os.path.join("data", "ventas")
+rita_de_ventas_txt = os.path.join("data", "ventas.txt")
 
 CATEGORIAS = ["Lacteos", "Bebidas", "Aseo", "Abarrotes", "Snacks"]
 
