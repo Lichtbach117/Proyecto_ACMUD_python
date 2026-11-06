@@ -28,6 +28,24 @@ def consultar_codigo(inventario):
     else:
         print("No existe un producto con ese código.")
 
+def modificar(inventario):
+    codigo = pedir_texto("Código: ").upper()
+    if codigo not in inventario:
+        raise ReglaNegocioError(f"No existe el producto {codigo}.")
+    if pedir_opcion("¿Qué desea modificar?", ["Precio", "Stock"]) == "Precio":
+        modificar_producto(inventario, codigo, precio=pedir_numero("Nuevo precio: ", float))
+    else:
+        modificar_producto(inventario, codigo, stock=pedir_numero("Nuevo stock: ", int))
+    print("Producto actualizado.")
+
+def eliminar(inventario):
+    codigo = pedir_texto("Código: ").upper()
+    if codigo not in inventario:
+        raise ReglaNegocioError(f"No existe el producto {codigo}.")
+    if pedir_si_no(f"¿Eliminar {inventario[codigo]['nombre']}?"):
+        eliminar_producto(inventario, codigo)
+        print("Producto eliminado.")
+
 def main():
     inventario = cargar_inventario(ruta_de_inventario_txt)
     while True:
@@ -58,9 +76,9 @@ def main():
             elif opcion == "4":
                 mostrar_productos(list(inventario.values()))
             elif opcion == "5":
-                pass
+                modificar(inventario)
             elif opcion == "6":
-                pass
+                eliminar_producto(inventario)
             elif opcion == "7":
                 pass
             elif opcion == "8":

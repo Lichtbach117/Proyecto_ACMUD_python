@@ -23,8 +23,17 @@ def mostrar_productos(productos):
 def buscar_por_codigo(inventario, codigo):
     return inventario.get(codigo)
 
-def modificar_producto():
-    pass
+def modificar_producto(inventario, codigo, precio=None, stock=None):
+    if codigo not in inventario:
+        raise ReglaNegocioError(f"No existe el producto {codigo}.")
+    if (precio is not None and precio <= 0) or (stock is not None and stock <= 0):
+        raise ReglaNegocioError("Los valores deben ser mayores que cero.")
+    if precio is not None:
+        inventario[codigo]["precio"] = precio
+    if stock is not None:
+        inventario[codigo]["stock"] = stock
 
-def eliminar_producto():
-    pass
+def eliminar_producto(inventario, codigo):
+    if codigo not in inventario:
+        raise ReglaNegocioError(f"No existe el producto {codigo}.")
+    del inventario[codigo]
