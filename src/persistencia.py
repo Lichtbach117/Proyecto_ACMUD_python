@@ -126,12 +126,9 @@ def editar_inventario(ruta, info):
         except Exception as e:
             print(f"Error al abrir el archivo: {e}")
 
-def leer_ventas(ruta):
-    """
-    abre ventas.txt para leer su contenido
-    """
-    try:
-        archivo = open(ruta, 'r', encoding='utf-8')
-        archivo.close()
-    except Exception as e:
-        print(f"Error al abrir el archivo: {e}")
+def registrar_venta(ruta, fecha, total, carrito):
+    """Agrega una venta al final: fecha|total|codigo:cantidad;codigo:cantidad"""
+    os.makedirs(os.path.dirname(ruta), exist_ok=True)
+    items = ";".join(f"{codigo}:{cantidad}" for codigo, cantidad in carrito.items())
+    with open(ruta, "a", encoding="utf-8") as f:
+        f.write(f"{fecha}|{round(total, 2)}|{items}\n")

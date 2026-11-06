@@ -2,6 +2,7 @@ import os
 from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo, eliminar_producto)
 from persistencia import (cargar_inventario, crear_archivo, guardar_inventario)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto, pedir_si_no)
+from ventas import nueva_venta
 
 ruta_de_inventario_txt = os.path.join("data", "inventario.txt")
 rita_de_ventas_txt = os.path.join("data", "ventas.txt")
@@ -80,7 +81,8 @@ def main():
             elif opcion == "6":
                 eliminar(inventario)
             elif opcion == "7":
-                pass
+                if nueva_venta(inventario, rita_de_ventas_txt):
+                    guardar_inventario(ruta_de_inventario_txt, inventario)
             elif opcion == "8":
                 pass
             elif opcion == "9":
