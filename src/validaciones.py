@@ -43,3 +43,11 @@ def pedir_opcion(mensaje, opciones):
         if n <= len(opciones):
             return opciones[n - 1]
         print("Esa opción no existe.")
+
+def pedir_si_no(mensaje):
+    """Devuelve True si el usuario responde 's'."""
+    while True:
+        desicion = input(mensaje + " (s/n): ").strip().lower()
+        if desicion in ("s", "n"):
+            return desicion == "s"
+        print("Responda 's' o 'n'.")
