@@ -1,9 +1,10 @@
 import os
+from datetime import date
 from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo, eliminar_producto)
-from persistencia import (cargar_inventario, crear_archivo, guardar_inventario)
+from persistencia import (cargar_inventario, crear_archivo, guardar_inventario, cargar_ventas, easter_egg)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto, pedir_si_no)
 from ventas import nueva_venta
-from reportes import alertas_stock
+from reportes import (alertas_stock, cierre_del_dia)
 
 ruta_de_inventario_txt = os.path.join("data", "inventario.txt")
 rita_de_ventas_txt = os.path.join("data", "ventas.txt")
@@ -87,7 +88,8 @@ def main():
             elif opcion == "8":
                 alertas_stock(inventario)
             elif opcion == "9":
-                pass
+                cierre_del_dia(inventario, cargar_ventas(rita_de_ventas_txt),
+                               date.today().isoformat())
             elif opcion == "10":
                 guardar_inventario(ruta_de_inventario_txt, inventario)
                 print("Inventario guardado.")
@@ -95,8 +97,10 @@ def main():
                 guardar_inventario(ruta_de_inventario_txt, inventario)
                 print("Hasta luego")
                 break
+            elif opcion == "20251020175":
+                easter_egg()
             else:
-                print("Opción invalida, porfis eliga una correcta (0-10).")
+                print("Opción invalida, porfavor eliga una correcta (0-10).")
         except ReglaNegocioError as e:
             print(f"Error: {e}")
 
