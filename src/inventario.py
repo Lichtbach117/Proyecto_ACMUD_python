@@ -49,6 +49,16 @@ def buscar_por_codigo(inventario, codigo):
     """
     return inventario.get(codigo)
 
+def buscar_por_categoria(inventario, categoria):
+    """busca y devuelve una lista de productos que pertenecen a una categoria especifica
+
+    Args:
+        inventario (diccionario): diccionario del inventario
+        categoria (str): categoria de los productos a buscar
+    """
+    return [producto for producto in inventario.values() if producto["categoria"].lower() == categoria.lower()]
+
+
 def modificar_producto(inventario, codigo, precio=None, stock=None):
     """actualiza el precio o el stock de un producto existente en el inventario
 

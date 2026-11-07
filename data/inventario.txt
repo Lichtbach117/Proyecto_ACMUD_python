@@ -1,1 +1,3 @@
-117|leche|Lacteos|20000.0|806|10|colanta
+117|leche|Lacteos|112.0|766|10|colanta
+12|huevos|Abarrotes|300.0|200|15|eggs.io
+1|1|Lacteos|1.0|0|1|1

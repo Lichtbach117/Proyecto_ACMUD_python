@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo, eliminar_producto)
+from inventario import (agregar_producto, modificar_producto, mostrar_productos, buscar_por_codigo, eliminar_producto, buscar_por_categoria)
 from persistencia import (cargar_inventario, crear_archivo, guardar_inventario, cargar_ventas, easter_egg)
 from validaciones import (ReglaNegocioError, pedir_numero, pedir_opcion, pedir_texto, pedir_si_no)
 from ventas import nueva_venta
@@ -45,6 +45,19 @@ def consultar_codigo(inventario):
         mostrar_productos([producto])
     else:
         print("No existe un producto con ese código.")
+
+def consultar_categoria(inventario):
+    """funcion que pide una categoria y busca los productos que pertenecen a ella para mostrarlos en consola
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+    """
+    categoria = pedir_opcion("Categoría:", CATEGORIAS)
+    encontrados = buscar_por_categoria(inventario, categoria)
+    if encontrados:
+        mostrar_productos(encontrados)
+    else:
+        print("No hay productos en esa categoría.")
 
 def modificar(inventario):
     """funcion que permite cambiar el precio o stock del producto, pide el codigo del producto y lo modifica si existe.
