@@ -1,1 +1,1 @@
-117|leche|Lacteos|20000.0|25|10|colanta
+117|leche|Lacteos|20000.0|1|10|colanta

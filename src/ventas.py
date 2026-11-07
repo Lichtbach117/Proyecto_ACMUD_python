@@ -19,7 +19,7 @@ def agregar_al_carrito(inventario, carrito, codigo, cantidad):
     total_pedido = carrito.get(codigo, 0) + cantidad
     if total_pedido > inventario[codigo]["stock"]:
         raise ReglaNegocioError(
-            f"Stock insuficiente de {inventario[codigo]['nombre']} (disponible: {inv[codigo]['stock']}).")
+            f"Stock insuficiente de {inventario[codigo]['nombre']} (disponible: {inventario[codigo]['stock']}).")
     carrito[codigo] = total_pedido
 
 def verificar_pago(pago, total):
@@ -55,7 +55,6 @@ def nueva_venta(inventario, ruta_ventas):
     descuento = subtotal * porcentaje
     total = subtotal - descuento
 
-    #mostrar_detalle(inventario, carrito)
     print(f"Subtotal:  ${subtotal:,.0f}")
     print(f"Descuento ({porcentaje:.0%}): ${descuento:,.0f}")
     print(f"TOTAL:     ${total:,.0f}")
@@ -71,7 +70,7 @@ def nueva_venta(inventario, ruta_ventas):
                 print("Venta cancelada.")
                 return False
 
-    for codigo, cantidad in carrito.items():          # confirmar: descontar stock
+    for codigo, cantidad in carrito.items():
         inventario[codigo]["stock"] -= cantidad
     registrar_venta(ruta_ventas, date.today().isoformat(), total, carrito)
     print(f"Venta registrada. Cambio: ${cambio:,.0f}")
