@@ -4,7 +4,11 @@ from validaciones import ReglaNegocioError, pedir_texto, pedir_numero, pedir_si_
 from persistencia import registrar_venta
 
 def calcular_descuento(subtotal):
-    """Devuelve el porcentaje de descuento según el subtotal."""
+    """calcula y devuelve el porcentaje de descuento aplicable segun el subtotal de la compra
+
+    Args:
+        subtotal (float): el valor total acumulado sin descuentos
+    """
     if subtotal >= 100000:
         return 0.10
     if subtotal >= 50000:
@@ -12,6 +16,17 @@ def calcular_descuento(subtotal):
     return 0.0
 
 def agregar_al_carrito(inventario, carrito, codigo, cantidad):
+    """agrega un producto y su cantidad al carrito de compras validando stock y existencia
+
+    Args:
+        inventario (diccionario): diccionario con los datos de los productos
+        carrito (diccionario): diccionario que almacena los productos en curso {codigo: cantidad}
+        codigo (str): codigo del producto a agregar
+        cantidad (int): cantidad de unidades a llevar
+
+    Raises:
+        ReglaNegocioError: funcion externa que se manda/activa cuando hay un error.
+    """
     if codigo not in inventario:
         raise ReglaNegocioError(f"No existe el producto {codigo}.")
     if cantidad <= 0:
@@ -23,6 +38,15 @@ def agregar_al_carrito(inventario, carrito, codigo, cantidad):
     carrito[codigo] = total_pedido
 
 def verificar_pago(pago, total):
+    """verifica si el dinero entregado por el cliente cubre el total de la compra y calcula el cambio
+
+    Args:
+        pago (float): dinero entregado por el cliente
+        total (float): valor total a pagar despues de descuentos
+
+    Raises:
+        ReglaNegocioError: funcion externa que se manda/activa cuando hay un error.
+    """
     if pago < total:
         raise ReglaNegocioError(f"Pago insuficiente: faltan ${total - pago:,.0f}.")
     return pago - total
@@ -30,7 +54,12 @@ def verificar_pago(pago, total):
 
 
 def nueva_venta(inventario, ruta_ventas):
-    """Flujo completo de una venta. Devuelve True si se confirmó, si se escribe fin, se termina la operacion"""
+    """Flujo completo de una venta. Devuelve True si se confirmó, si se escribe fin, se termina la operacion
+
+    Args:
+        inventario (diccionario): diccionario con los datos de los productos
+        ruta_ventas (str): ruta del archivo de texto donde se registran las ventas
+    """
     carrito = {}
     print("Agregue productos. Escriba 'fin' para terminar.")
     while True:

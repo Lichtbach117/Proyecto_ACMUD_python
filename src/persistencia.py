@@ -4,7 +4,11 @@ from tabulate import tabulate
 ENCAVESADO=["id", "Codigo", "Nombre", "Stock", "Categoria", "Precio"]
 
 def crear_archivo(ruta):
-    """Crea el archivo y la carpeta si no existen"""
+    """Crea el archivo y la carpeta si no existen
+
+    Args:
+        ruta (str): ruta del archivo a crear
+    """
 
     if not os.path.exists("data"):
         os.makedirs("data")
@@ -21,6 +25,9 @@ def crear_archivo(ruta):
 def cargar_inventario(ruta):
     """Devuelve un dict {codigo: producto}, esto devuelve o 
     sirve para mirar la informacoin del archivo si ya existe o no para crearlo
+
+    Args:
+        ruta (str): ruta del archivo de inventario
     """
     
     inventario = {}
@@ -67,6 +74,9 @@ def guardar_inventario(ruta, inventario):
 def leer_inventario(ruta):
     """
     abre inventario.txt o ventas.txt para leer su contenido
+
+    Args:
+        ruta (str): ruta del archivo a leer
     """
 
     ruta_completa = os.path.join("data", ruta) if not ruta.startswith("data") else ruta
@@ -98,6 +108,10 @@ def leer_inventario(ruta):
 def editar_inventario(ruta, info):
     """
     abre inventario.txt para editar su contenido
+
+    Args:
+        ruta (str): ruta del archivo de inventario
+        info (list): lista con la informacion del producto a agregar
     """
     ruta_completa = os.path.join("data", ruta) if not ruta.startswith("data") else ruta
 

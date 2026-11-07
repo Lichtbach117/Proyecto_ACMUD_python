@@ -12,6 +12,15 @@ rita_de_ventas_txt = os.path.join("data", "ventas.txt")
 CATEGORIAS = ["Lacteos", "Bebidas", "Aseo", "Abarrotes", "Snacks"]
 
 def registrar(inventario):
+    """funcion que registra los productos en el txt con ayuda de la funcion agregar_producto de inventario, se piden los
+        datos con las funciones de validaciones.py
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+
+    Raises:
+        ReglaNegocioError: funcion externa que se manda/activa cuando hay un error
+    """
     codigo = pedir_texto("Código: ").upper()
     if codigo in inventario:
         raise ReglaNegocioError(f"El código {codigo} ya existe.")
@@ -25,6 +34,12 @@ def registrar(inventario):
     print("Producto registrado.")
 
 def consultar_codigo(inventario):
+    """funcion que con ayuda de funciones de inventario.py, pide el codigo del producto a buscar y devuelve la informacion del mismo,
+    si no existe el producto con ese codigo, muestra un mensaje
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+    """
     producto = buscar_por_codigo(inventario, pedir_texto("Código: ").upper())
     if producto:
         mostrar_productos([producto])
@@ -32,6 +47,15 @@ def consultar_codigo(inventario):
         print("No existe un producto con ese código.")
 
 def modificar(inventario):
+    """funcion que permite cambiar el precio o stock del producto, pide el codigo del producto y lo modifica si existe.
+    luego manda la info a inventario.py con la funcion modificar_producto.
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+
+    Raises:
+        ReglaNegocioError: funcion externa que se manda/activa cuando hay un error.
+    """
     codigo = pedir_texto("Código: ").upper()
     if codigo not in inventario:
         raise ReglaNegocioError(f"No existe el producto {codigo}.")
@@ -42,6 +66,14 @@ def modificar(inventario):
     print("Producto actualizado.")
 
 def eliminar(inventario):
+    """fucion que permite eliminar un producto del inventario preguntando su codigo y eliminandolo si existe
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos.
+
+    Raises:
+        ReglaNegocioError: funcion externa que se manda/activa cuando hay un error.
+    """
     codigo = pedir_texto("Código: ").upper()
     if codigo not in inventario:
         raise ReglaNegocioError(f"No existe el producto {codigo}.")
@@ -50,6 +82,8 @@ def eliminar(inventario):
         print("Producto eliminado.")
 
 def main():
+    """funcion principal que se encarga de mostrar la interfaz/menu con las opciones de cada funcion del sistema
+    """
     inventario = cargar_inventario(ruta_de_inventario_txt)
     while True:
         print("Bienvenido al sistema de administración de la tiendita de Don Aurelio\n")

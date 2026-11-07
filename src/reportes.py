@@ -4,7 +4,11 @@ from collections import Counter
 
 
 def alertas_stock(inventario):
-    """Productos con stock <= mínimo, agrupados por proveedor."""
+    """funcion que muestra los productos cuyo stock actual es menor o igual al minimo permitido, agrupandolos por proveedor
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+    """
     proveedores = {}
     for productos in inventario.values():
         if productos["stock"] <= productos["stock_minimo"]:
@@ -21,6 +25,13 @@ def alertas_stock(inventario):
                        tablefmt="grid"))
 
 def cierre_del_dia(inventario, ventas, fecha):
+    """funcion que genera un reporte resumido del cierre del dia incluyendo total vendido, numero de ventas, ticket promedio, producto mas vendido y categorias con movimiento
+
+    Args:
+        inventario (diccionario): diccionario con los elementos o datos de los productos
+        ventas (lista): lista con el historico de ventas
+        fecha (str): fecha en formato ISO para filtrar el cierre
+    """
     ventas_del_dia = [venta for venta in ventas if venta["fecha"] == fecha]
     total = sum(venta["total"] for venta in ventas_del_dia)
     numero_ventas = len(ventas_del_dia)
